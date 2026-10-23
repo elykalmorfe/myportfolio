@@ -5,8 +5,8 @@ export const aboutDetailFields: { key: keyof About; label: string; placeholder: 
     key: 'education',
     label: 'Education',
     placeholder: `North Eastern Mindanao State University (NEMSU) – Tandag Campus,
-    'Program: Bachelor of Science in Computer Science',
-    'Year Level: 4th Year Student'
+  Program: Bachelor of Science in Computer Science,
+  Year Level: 4th Year Student`,
   },
   {
     key: 'careerInterests',
