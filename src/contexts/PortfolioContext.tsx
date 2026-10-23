@@ -60,10 +60,18 @@ function isEmptyPlaceholder(entry: ExperienceEntry) {
 }
 
 function mergeExperiences(stored: ExperienceEntry[] | undefined): ExperienceEntry[] {
-  if (!stored?.length) return defaultContent.experiences;
-  const onlyOriginalEmpty =
-    stored.length === 1 && stored[0].id === 'exp-placeholder' && isEmptyPlaceholder(stored[0]);
-  return onlyOriginalEmpty ? defaultContent.experiences : stored;
+  if (!stored?.length || stored.every(isEmptyPlaceholder)) return defaultContent.experiences;
+
+  const seenIds = new Set<string>();
+  return stored.map((entry, index) => {
+    if (!seenIds.has(entry.id)) {
+      seenIds.add(entry.id);
+      return entry;
+    }
+    const id = `${entry.id}-legacy-${index}`;
+    seenIds.add(id);
+    return { ...entry, id };
+  });
 }
 
 function loadContent(): PortfolioContent {
@@ -88,8 +96,20 @@ function loadContent(): PortfolioContent {
       experiences: mergeExperiences(parsed.experiences),
       achievements: (parsed.achievements ?? defaultContent.achievements).map((item) => {
         const defaultAchievement = defaultAchievements.get(item.id);
+        if (!defaultAchievement) {
+          return {
+            ...item,
+            videoUrl: item.videoUrl ?? '',
+            files: item.files ?? []
+          };
+        }
         return {
+          ...defaultAchievement,
           ...item,
+          title: item.title || defaultAchievement.title,
+          date: item.date || defaultAchievement.date,
+          description: item.description || defaultAchievement.description,
+          highlights: item.highlights?.length ? item.highlights : defaultAchievement.highlights,
           videoUrl: item.videoUrl || defaultAchievement?.videoUrl || '',
           files: item.files?.length ? item.files : defaultAchievement?.files ?? []
         };

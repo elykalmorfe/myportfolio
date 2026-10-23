@@ -96,7 +96,7 @@ export const defaultContent: PortfolioContent = {
     images: []
   },
   {
-    id: 'exp-placeholder',
+    id: 'exp-secretary',
     role: 'Secretary',
     organization: 'Leadership Initiatives Navigating Computer Science Students (LINCSS) ',
     startDate: 'September 2025',
