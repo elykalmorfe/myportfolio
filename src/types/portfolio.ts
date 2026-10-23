@@ -3,6 +3,7 @@ export interface StoredFile {
   name: string;
   type: string;
   size: number;
+  url?: string;
 }
 
 export interface Profile {

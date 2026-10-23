@@ -68,6 +68,12 @@ export function downloadBlob(blob: Blob, name: string): void {
 }
 
 export async function downloadStoredFile(file: StoredFile): Promise<boolean> {
+  if (file.url) {
+    const response = await fetch(file.url);
+    if (!response.ok) return false;
+    downloadBlob(await response.blob(), file.name);
+    return true;
+  }
   const blob = await loadFile(file.id).catch(() => null);
   if (!blob) return false;
   downloadBlob(blob, file.name);

@@ -1,6 +1,13 @@
-import { PortfolioContent } from '../types/portfolio';
+import { PortfolioContent, StoredFile } from '../types/portfolio';
 
 const devicon = (path: string) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}`;
+const publicFile = (id: string, name: string, type: string, size: number, url: string): StoredFile => ({
+  id,
+  name,
+  type,
+  size,
+  url
+});
 
 export const defaultContent: PortfolioContent = {
   profile: {
@@ -8,7 +15,13 @@ export const defaultContent: PortfolioContent = {
     headline: 'Designing where technology meets creativity.',
     intro:
     "I'm interested in technology, graphic design, UI/UX, and multimedia — and in the creative problem-solving that connects them. I like turning ideas into work that is both useful and thoughtfully made.",
-    photo: null,
+    photo: publicFile(
+      'profile-photo',
+      'profile-photo.jpg',
+      'image/jpeg',
+      533287,
+      '/portfolio-media/profile-photo.jpg'
+    ),
     resume: null,
     resumeUrl: '',
     portfolioUrl: ''
@@ -113,24 +126,56 @@ export const defaultContent: PortfolioContent = {
       'Gained practical experience in digital media production.',
       'Developed skills in video editing and graphic design.',  
       'Improved collaboration, communication, and time management.'
-  ], files: [], videoUrl: '' },
+  ], files: [
+    publicFile(
+      'ojt-certificate',
+      'ojt-certificate.png',
+      'image/png',
+      5717064,
+      '/portfolio-media/ojt-certificate.png'
+    )
+  ], videoUrl: '/portfolio-media/intern-campaign-video.mp4' },
   { id: 'ach-pagpadayag', category: 'pagpadayag', title: 'NEMSU PAGPADAYAG Certificate', date: 'February 2026', description: 'Contributed as a Video Editor for NEMSU PAGPADAYAG 2026, supporting the production of engaging visual content for the university event. Applied video editing techniques, creative storytelling, and multimedia production skills to help deliver quality event presentations.', highlights: [
       'Contributed to video production for the university event.',
       'Edited and enhanced video content for visual presentations.',
       'Applied transitions, audio adjustments, and creative effects.',    
       'Developed practical experience in event-based multimedia production.'
-  ], files: [], videoUrl: '' },
+  ], files: [
+    publicFile(
+      'nemsu-pagpadayag',
+      'nemsu-pagpadayag.jpg',
+      'image/jpeg',
+      120087,
+      '/portfolio-media/nemsu-pagpadayag.jpg'
+    )
+  ], videoUrl: '' },
   { id: 'ach-recognition', category: 'recognition', title: 'School Recognition Certificate', date: 'August 2025', description: 'Received school recognition in acknowledgment of dedication, commitment, and contributions to academic or school-related activities. This achievement reflects my motivation to continuously improve, actively participate in educational opportunities, and pursue personal and professional growth.', highlights: [
     'Recognized for academic performance or school-related contributions.',
     'Demonstrated commitment to learning and continuous improvement.',
     'Participated in activities supporting personal and academic development.'
-  ], files: [], videoUrl: '' },
+  ], files: [
+    publicFile(
+      'school-recognition',
+      'school-recognition.jpg',
+      'image/jpeg',
+      706897,
+      '/portfolio-media/school-recognition.jpg'
+    )
+  ], videoUrl: '' },
   { id: 'ach-officer', category: 'officer', title: 'School Officer Certificate', date: '', description: 'Served as a student organization officer, gaining valuable experience in leadership, teamwork, and organizational responsibilities. This role provided opportunities to collaborate with fellow students, support school initiatives, and contribute to activities that promote student engagement and community involvement.', highlights: [
     'Supported the planning and coordination of student activities.',
     'Collaborated with fellow officers and organization members.',
     'Developed leadership, communication, and organizational skills.',  
     'Demonstrated responsibility and commitment to assigned duties.'
-  ], files: [], videoUrl: '' }],
+  ], files: [
+    publicFile(
+      'school-officer',
+      'school-officer.jpg',
+      'image/jpeg',
+      144678,
+      '/portfolio-media/school-officer.jpg'
+    )
+  ], videoUrl: '' }],
 
   contact: {
     email: 'almorfelyka@gmail.com',

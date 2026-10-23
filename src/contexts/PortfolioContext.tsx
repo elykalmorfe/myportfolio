@@ -71,8 +71,13 @@ function loadContent(): PortfolioContent {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultContent;
     const parsed = JSON.parse(raw) as Partial<PortfolioContent>;
+    const defaultAchievements = new Map(defaultContent.achievements.map((item) => [item.id, item]));
     return {
-      profile: { ...defaultContent.profile, ...parsed.profile },
+      profile: {
+        ...defaultContent.profile,
+        ...parsed.profile,
+        photo: parsed.profile?.photo ?? defaultContent.profile.photo
+      },
       about: { ...defaultContent.about, ...parsed.about },
       contact: { ...defaultContent.contact, ...parsed.contact },
       tools: (parsed.tools ?? defaultContent.tools).map((tool) =>
@@ -81,11 +86,14 @@ function loadContent(): PortfolioContent {
           tool
       ),
       experiences: mergeExperiences(parsed.experiences),
-      achievements: (parsed.achievements ?? defaultContent.achievements).map((item) => ({
-        ...item,
-        videoUrl: item.videoUrl ?? '',
-        files: item.files ?? []
-      })),
+      achievements: (parsed.achievements ?? defaultContent.achievements).map((item) => {
+        const defaultAchievement = defaultAchievements.get(item.id);
+        return {
+          ...item,
+          videoUrl: item.videoUrl || defaultAchievement?.videoUrl || '',
+          files: item.files?.length ? item.files : defaultAchievement?.files ?? []
+        };
+      }),
     };
   } catch {
     return defaultContent;

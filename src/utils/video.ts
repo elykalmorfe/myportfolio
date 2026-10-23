@@ -5,6 +5,9 @@ export type VideoEmbed =
 export function parseVideoUrl(raw: string): VideoEmbed | null {
   const value = raw.trim();
   if (!value) return null;
+  if (/^\/[^?#]*\.(mp4|webm|m4v|ogg)(?:[?#]|$)/i.test(value)) {
+    return { kind: 'file', src: value };
+  }
 
   try {
     const url = new URL(value);

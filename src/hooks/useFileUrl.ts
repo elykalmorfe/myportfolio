@@ -15,6 +15,11 @@ export function useFileUrl(file: StoredFile | null | undefined) {
       setStatus('idle');
       return;
     }
+    if (file?.url) {
+      setUrl(file.url);
+      setStatus('ready');
+      return;
+    }
     let active = true;
     let objectUrl: string | null = null;
     setStatus('loading');
@@ -34,7 +39,7 @@ export function useFileUrl(file: StoredFile | null | undefined) {
       active = false;
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
-  }, [id]);
+  }, [id, file?.url]);
 
   return { url, status };
 }
