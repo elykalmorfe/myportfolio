@@ -9,7 +9,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { WindowFrame } from '../ui/WindowFrame';
 
 const tabs: {key: keyof About;label: string;placeholder: string;}[] = [
-{ key: 'introduction', label: 'Introduction', placeholder: 'Add a personal introduction — who you are and what drives your work.' },
+{ key: 'introduction', label: 'Introduction', placeholder: 'I am a passionate Bachelor of Science in Computer Science student with a strong interest in technology, digital creativity, and software development. I enjoy combining technical knowledge with creative ideas to develop meaningful digital experiences. Driven by curiosity and continuous learning, I strive to improve my skills, explore emerging technologies, and create work that is both functional and visually engaging.' },
 ...aboutDetailFields];
 
 
